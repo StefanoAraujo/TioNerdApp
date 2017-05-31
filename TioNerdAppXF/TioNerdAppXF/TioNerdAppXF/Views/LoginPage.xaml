@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TioNerdAppXF.Views.LoginPage"
+             Title="{Binding Title}"
+             BackgroundColor="#e0e0e0">
+
+    <StackLayout HorizontalOptions="Center"
+                 VerticalOptions="CenterAndExpand">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
+        
+        <Label Text="Entre no aplicativo com seu Facebook" TextColor="#000000" FontSize="Small" />
+        <Button Command="{Binding LoginCommand}" Text="Entrar" BackgroundColor="#3b5998" TextColor="#FFFFFF" FontSize="Large "/>
+        
+    </StackLayout>
+</ContentPage>
