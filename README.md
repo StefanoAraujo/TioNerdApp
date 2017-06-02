@@ -1,4 +1,4 @@
-# TioNerdApp
+# TioNerdApp - note_vini Branch
 Aplicativo desenvolvido para o propósito de ganhar certificação da Maratona Xamarin Intermediária.
 
 Este App possui Social Login com o Facebook, utilizando como ferramenta o SDK do Microsoft Azure Mobile Client.
