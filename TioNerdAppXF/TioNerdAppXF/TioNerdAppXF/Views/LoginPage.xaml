@@ -5,12 +5,18 @@
              Title="{Binding Title}"
              BackgroundColor="#e0e0e0">
 
-    <StackLayout HorizontalOptions="Center"
+    <StackLayout HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand">
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
-        
-        <Label Text="Entre no aplicativo com seu Facebook" TextColor="#000000" FontSize="Small" />
-        <Button Command="{Binding LoginCommand}" Text="Entrar" BackgroundColor="#3b5998" TextColor="#FFFFFF" FontSize="Large "/>
-        
+
+        <Label Text="Entre no aplicativo com seu Facebook" Style="{StaticResource StyleDescription}" />
+        <Image Source="ic_open.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LoginCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+
     </StackLayout>
 </ContentPage>

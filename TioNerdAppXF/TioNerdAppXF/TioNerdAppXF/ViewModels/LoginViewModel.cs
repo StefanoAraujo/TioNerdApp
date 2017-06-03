@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Input;
 using TioNerdAppXF.Helpers;
 using TioNerdAppXF.Services;
 using Xamarin.Forms;
@@ -16,7 +15,7 @@ namespace TioNerdAppXF.ViewModels
             _azureService = DependencyService.Get<AzureService>();
 
             Title = "Página de Login";
-            LoginCommand = new Command(async () => await ExecuteLoginCommandAsync());
+            LoginCommand = new Command(async () => await ExecuteLoginCommandAsync(), () => !IsBusy);
         }
 
         private async Task ExecuteLoginCommandAsync()

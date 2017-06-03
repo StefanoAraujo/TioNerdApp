@@ -69,5 +69,9 @@ namespace TioNerdAppXF.ViewModels
             await Application.Current.MainPage.Navigation.PushAsync(page);
         }
 
+        public async Task DisplayAlert(string title, string message, string cancel)
+        {
+            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+        }
     }
 }

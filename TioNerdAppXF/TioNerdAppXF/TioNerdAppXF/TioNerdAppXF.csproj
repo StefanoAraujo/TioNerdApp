@@ -40,7 +40,10 @@
     </Compile>
     <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Models\Friend.cs" />
+    <Compile Include="Models\Repositorio.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Services\AzureEasyTableService.cs" />
     <Compile Include="Services\AzureService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
