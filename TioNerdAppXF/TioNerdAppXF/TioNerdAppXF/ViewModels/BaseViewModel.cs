@@ -15,15 +15,22 @@ namespace TioNerdAppXF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        string _propTitle = string.Empty;
-        bool _propIsBusy;
+        private string _propTitle = string.Empty;
+        private bool _propIsBusy;
+        private bool _isLogged;
+
+        public bool IsLogged
+        {
+            get { return _isLogged; }
+            set { SetProperty(ref _isLogged, value); }
+        }
 
         public string Title
         {
             get { return _propTitle; }
             set { SetProperty(ref _propTitle, value); }
         }
-        
+
         public bool IsBusy
         {
             get { return _propIsBusy; }
@@ -67,6 +74,14 @@ namespace TioNerdAppXF.ViewModels
             }
 
             await Application.Current.MainPage.Navigation.PushAsync(page);
+        }
+
+        public async Task DisplayAlert(string title, string message, string cancel)
+
+        {
+
+            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+
         }
 
     }

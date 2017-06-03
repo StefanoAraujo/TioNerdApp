@@ -1,7 +1,7 @@
 ﻿using TioNerdAppXF.ViewModels;
 using Xamarin.Forms;
 
-namespace TioNerdAppXF
+namespace TioNerdAppXF.Views
 {
     public partial class MainPage : ContentPage
     {

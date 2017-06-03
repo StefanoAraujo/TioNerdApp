@@ -1,27 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:TioNerdAppXF"
-             x:Class="TioNerdAppXF.MainPage"
-             Title="{Binding Title}">
+             x:Class="TioNerdAppXF.Views.MainPage"
+             Title="{Binding Title}"
+             BackgroundColor="#e0e0e0">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sair" Command="{Binding LogOutCommand}"/>
+        <ToolbarItem Command="{Binding LogOutCommand}" Icon="ic_exit.png" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
-        <StackLayout Padding="60"
-                     HorizontalOptions="Center"
-                     VerticalOptions="CenterAndExpand"
-                     BackgroundColor="#e0e0e0">
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
-            <Label Text="Id do usuário" FontSize="Medium" TextColor="#000000" />
-            <Label Text="{Binding UserId}" FontSize="Large" TextColor="#3b5998" />
+    <StackLayout Spacing="0"
+                 HorizontalOptions="CenterAndExpand"
+                 VerticalOptions="StartAndExpand">
 
-            <Label Text="Id do usuário" FontSize="Medium" TextColor="#000000" />
-            <Label Text="{Binding Token}" FontSize="Large" TextColor="#3b5998" />
+        <Button BackgroundColor="#FFFFFF" Command="{Binding GetFriendsCommand}" Image="ic_renew.png" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}" 
+                           Color="#000000"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+        <ListView ItemsSource="{Binding Friends}"
+                  HasUnevenRows="True"
+                  SeparatorColor="Silver"
+                  VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding CompleteName}" Style="{StaticResource StyleName}" />
+                            <Label Text="{Binding Age}" Style="{StaticResource StyleDescription}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-            <Switch IsToggled="{Binding IsLogged}" />
-        </StackLayout>
-    </ScrollView>
-
+    </StackLayout>
 </ContentPage>

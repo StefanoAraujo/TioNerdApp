@@ -4,7 +4,21 @@
              x:Class="TioNerdAppXF.Application">
 	<Application.Resources>
 
-		<!-- Application resource dictionary -->
+	    <ResourceDictionary>
+            <Color x:Key="CorName">#0069c1</Color>
+	        <Color x:Key="CorDescription">#000000</Color>
 
-	</Application.Resources>
+	        <Style x:Key="StyleName" TargetType="Label">
+	            <Setter Property="TextColor" Value="{StaticResource CorName}" />
+	            <Setter Property="FontSize" Value="Large" />
+	            <Setter Property="FontAttributes" Value="Bold"></Setter>
+	        </Style>
+
+	        <Style x:Key="StyleDescription" TargetType="Label">
+	            <Setter Property="TextColor" Value="{StaticResource CorDescription}" />
+	            <Setter Property="FontSize" Value="Small" />
+	        </Style>
+	    </ResourceDictionary>
+
+    </Application.Resources>
 </Application>

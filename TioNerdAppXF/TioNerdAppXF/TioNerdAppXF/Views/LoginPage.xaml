@@ -5,12 +5,20 @@
              Title="{Binding Title}"
              BackgroundColor="#e0e0e0">
 
-    <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="CenterAndExpand">
+    <StackLayout HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand">
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
-        
-        <Label Text="Entre no aplicativo com seu Facebook" TextColor="#000000" FontSize="Small" />
-        <Button Command="{Binding LoginCommand}" Text="Entrar" BackgroundColor="#3b5998" TextColor="#FFFFFF" FontSize="Large "/>
-        
+
+        <Label Text="Entre no aplicativo com seu Facebook" TextColor="#000000" FontSize="Large" HorizontalTextAlignment="Center" />
+
+        <Button Text="Facebook Login" 
+                TextColor="#FFFFFF" 
+                FontSize="Large" 
+                BackgroundColor="#3b5998" 
+                Command="{Binding LoginCommand}" 
+                Image="ic_open.png"
+                VerticalOptions="CenterAndExpand"/>
+
     </StackLayout>
+
 </ContentPage>

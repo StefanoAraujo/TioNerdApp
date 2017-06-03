@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Windows.Input;
 using TioNerdAppXF.Helpers;
 using TioNerdAppXF.Services;
 using Xamarin.Forms;

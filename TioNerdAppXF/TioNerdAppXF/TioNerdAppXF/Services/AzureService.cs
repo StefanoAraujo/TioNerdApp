@@ -28,7 +28,7 @@ namespace TioNerdAppXF.Services
             }
         }
 
-        public async Task<bool> LoginAsync()
+        public async Task<bool> LoginAsync(bool isLogged)
         {
             Initialize();
 
@@ -39,6 +39,7 @@ namespace TioNerdAppXF.Services
             {
                 Settings.AuthToken = string.Empty;
                 Settings.UserId = string.Empty;
+                Settings.IsLoggedIn = isLogged;
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
@@ -52,6 +53,7 @@ namespace TioNerdAppXF.Services
             {
                 Settings.AuthToken = user.MobileServiceAuthenticationToken;
                 Settings.UserId = user.UserId;
+                Settings.IsLoggedIn = isLogged;
             }
 
             return true;
@@ -65,9 +67,11 @@ namespace TioNerdAppXF.Services
                 return;
 
             // Remove the token from the cache
-            Client.CurrentUser = new MobileServiceUser(string.Empty) {MobileServiceAuthenticationToken = string.Empty};
+            Client.CurrentUser = new MobileServiceUser(string.Empty) { MobileServiceAuthenticationToken = string.Empty };
             Settings.UserId = string.Empty;
             Settings.AuthToken = string.Empty;
+            Settings.IsLoggedIn = false;
+
 
             // Remove the token from the MobileServiceClient
             await Client.LogoutAsync();
