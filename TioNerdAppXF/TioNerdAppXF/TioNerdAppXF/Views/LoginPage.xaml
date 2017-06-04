@@ -7,8 +7,6 @@
 
     <StackLayout HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand">
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
-
         <Label Text="Entre no aplicativo com seu Facebook" Style="{StaticResource StyleDescription}" />
         <Image Source="ic_open.png"
                HorizontalOptions="Center"
@@ -17,6 +15,8 @@
                 <TapGestureRecognizer Command="{Binding LoginCommand}" />
             </Image.GestureRecognizers>
         </Image>
+
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
 
     </StackLayout>
 </ContentPage>

@@ -81,7 +81,7 @@ namespace TioNerdAppXF.ViewModels
             try
             {
                 await _azureService.LogoutAsync();
-                Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
             catch (Exception ex)
             {

@@ -65,7 +65,7 @@ namespace TioNerdAppXF.ViewModels
             {
                 page.BindingContext = viewModel;
             }
-
+            
             await Application.Current.MainPage.Navigation.PushAsync(page);
         }
 
