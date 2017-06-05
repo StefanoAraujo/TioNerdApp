@@ -23,7 +23,7 @@ namespace TioNerdAppXF.ViewModels
             get { return _propTitle; }
             set { SetProperty(ref _propTitle, value); }
         }
-        
+
         public bool IsBusy
         {
             get { return _propIsBusy; }
@@ -55,7 +55,7 @@ namespace TioNerdAppXF.ViewModels
             var viewModelWordLenght = "ViewModel".Length;
 
             // Está tirando a palavra ViewModel da classe. Ficando apenas: 'MonkeyHub.AboutPage'.
-            var viewTypeName = $"TioNerdAppXF.{viewModelTypeName.Substring(0, viewModelTypeName.Length - viewModelWordLenght)}Page";
+            var viewTypeName = $"TioNerdAppXF.Views.{viewModelTypeName.Substring(0, viewModelTypeName.Length - viewModelWordLenght)}Page";
             var viewType = Type.GetType(viewTypeName);
 
             var page = Activator.CreateInstance(viewType) as Page;
@@ -65,13 +65,13 @@ namespace TioNerdAppXF.ViewModels
             {
                 page.BindingContext = viewModel;
             }
-            
-            await Application.Current.MainPage.Navigation.PushAsync(page);
+
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(page);
         }
 
         public async Task DisplayAlert(string title, string message, string cancel)
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+            await Xamarin.Forms.Application.Current.MainPage.DisplayAlert(title, message, cancel);
         }
     }
 }

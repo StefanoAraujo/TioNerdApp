@@ -2,27 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TioNerdAppXF"
-             x:Class="TioNerdAppXF.MainPage"
+             x:Class="TioNerdAppXF.Views.MainPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Info" Command="{Binding UserInfoCommand}" Priority="0" />
-        <ToolbarItem Text="Sair" Command="{Binding LogOutCommand}" Icon="ic_exit.png" />        
+        <ToolbarItem Command="{Binding LogOutCommand}" Icon="ic_exit.png" Order="Primary" />
+        <ToolbarItem Text="Info" Command="{Binding UserInfoCommand}" Order="Secondary" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout BackgroundColor="#e0e0e0"
+    <StackLayout BackgroundColor="#212121"
                  Spacing="10"
+                 Padding="10"
                  >
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#FFFFFF" />
         <ListView ItemsSource="{Binding FriendsCollection}"
                   HasUnevenRows="True"
-                  SeparatorColor="Silver"
-                  >
+                  SeparatorColor="Silver">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout HorizontalOptions="FillAndExpand"
                                      Padding="10"
-                                     VerticalOptions="CenterAndExpand">
+                                     VerticalOptions="CenterAndExpand"
+                                     BackgroundColor="#FFFFFF">
                             <Label Text="{Binding CompleteName}" Style="{StaticResource StyleName}" />
                             <Label Text="{Binding Age, StringFormat='{0} anos'}" Style="{StaticResource StyleAge}" />
                             <Label Text="{Binding FacebookPage}" Style="{StaticResource StyleUrl}" />
@@ -31,10 +32,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout HorizontalOptions="CenterAndExpand"
-                     VerticalOptions="CenterAndExpand"
-                     Orientation="Horizontal">
-            <Button Command="{Binding GetFriendsCommand}" Image="ic_renew.png" />
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Orientation="Horizontal"
+                     BackgroundColor="#212121">
+            <Button Command="{Binding GetFriendsCommand}" 
+                    Image="ic_renew.png" 
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="#FFFFFF"/>
         </StackLayout>
     </StackLayout>
 

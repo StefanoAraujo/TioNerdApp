@@ -8,6 +8,7 @@ using TioNerdAppXF.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System;
 
 [assembly: Dependency(typeof(AzureService))]
 namespace TioNerdAppXF.Services
@@ -22,7 +23,7 @@ namespace TioNerdAppXF.Services
 
         public MobileServiceUser User { get; set; }
 
-        public FacebookProfile profile { get; set; }
+        public FacebookProfile Profile { get; set; }
 
         public void Initialize()
         {
@@ -69,10 +70,16 @@ namespace TioNerdAppXF.Services
 
         public async Task LogoutAsync()
         {
-            Initialize();
-
             if (Client.CurrentUser?.MobileServiceAuthenticationToken == null)
                 return;
+
+            // Invalidate the token on the mobile backend
+            var authUri = new Uri($"{AppUrl}/.auth/logout");
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Add("X-ZUMO-AUTH", Client.CurrentUser.MobileServiceAuthenticationToken);
+                await httpClient.GetAsync(authUri);
+            }
 
             // Remove the token from the cache
             Client.CurrentUser = new MobileServiceUser(string.Empty) { MobileServiceAuthenticationToken = string.Empty };
@@ -84,13 +91,15 @@ namespace TioNerdAppXF.Services
         }
 
         public async Task<FacebookProfile> GetFacebookProfileAsync()
-        {            
+        {
 
             identities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
-            var completeName = identities[0].UserClaims.Find(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")).Value;
+
+            //var completeName = identities[0].UserClaims.Find(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")).Value;
+
             var userToken = identities[0].AcessToken;
 
-            var requestUrl = $"https://graph.facebook.com/v2.9/me/?fields=id,name,picture.height(700)&access_token={userToken}";
+            var requestUrl = "https://graph.facebook.com/v2.9/me/?fields=id,name,gender,picture.height(700){is_silhouette,url,width}&access_token=" + userToken;
 
             var httpClient = new HttpClient();
 
@@ -100,7 +109,6 @@ namespace TioNerdAppXF.Services
 
             Settings.AuthToken = User.MobileServiceAuthenticationToken;
             Settings.UserId = User.UserId;
-            Settings.Nome = completeName;
 
             return facebookProfile;
         }

@@ -26,8 +26,6 @@ namespace TioNerdAppXF.ViewModels
         {
             _azureService = DependencyService.Get<AzureService>();
 
-            IsBusy = false;
-
             Title = "Lista de Amigos";
 
             UserId = Settings.UserId;
@@ -50,7 +48,19 @@ namespace TioNerdAppXF.ViewModels
                 return;
 
             IsBusy = true;
-            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new FacebookInfoPage());
+            try
+            {
+                await PushAsync<FacebookLoginViewModel>();
+            }
+            catch (Exception error)
+            {
+                await DisplayAlert("Error!", $"Seguinte error aconteceu: {error.Message}", "ok");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
 
         async Task ExecuteGetFriendsCommandAsync()
@@ -59,10 +69,11 @@ namespace TioNerdAppXF.ViewModels
             {
                 return;
             }
+
             Exception error = null;
+            IsBusy = true;
             try
             {
-                IsBusy = true;
 
                 var repositorio = new Repositorio();
                 var items = await repositorio.GetFriends();
@@ -74,7 +85,6 @@ namespace TioNerdAppXF.ViewModels
             }
             catch (Exception ex)
             {
-
                 error = ex;
             }
             finally
@@ -97,12 +107,11 @@ namespace TioNerdAppXF.ViewModels
             try
             {
                 await _azureService.LogoutAsync();
-                await Application.Current.MainPage.Navigation.PopAsync();
                 Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                await DisplayAlert("Falha ao Sair!", $"O erro deu esta mensagem {ex.Message}", "OK");
+                await DisplayAlert("Falha ao Sair!", $"O erro deu esta mensagem {error.Message}", "OK");
             }
             finally
             {
