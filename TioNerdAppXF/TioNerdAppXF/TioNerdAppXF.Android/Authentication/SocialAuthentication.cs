@@ -11,6 +11,7 @@ namespace TioNerdAppXF.Droid.Authentication
 {
     public class SocialAuthentication : IAuthentication
     {
+
         public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client, MobileServiceAuthenticationProvider provider,
             IDictionary<string, string> paremeters = null)
         {

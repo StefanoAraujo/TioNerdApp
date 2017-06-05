@@ -12,7 +12,12 @@ namespace TioNerdAppXF.ViewModels
 
         public LoginViewModel()
         {
+            Settings.AuthToken = string.Empty;
+            Settings.UserId = string.Empty;
+
             _azureService = DependencyService.Get<AzureService>();
+
+            IsBusy = false;
 
             Title = "Página de Login";
             LoginCommand = new Command(async () => await ExecuteLoginCommandAsync(), () => !IsBusy);

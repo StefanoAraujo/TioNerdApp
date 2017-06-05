@@ -10,12 +10,12 @@ namespace TioNerdAppXF
         {
             InitializeComponent();
 
-            MainPage = Settings.IsLoggedIn ? new NavigationPage(new MainPage()) : new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            // Handle when your app starts            
         }
 
         protected override void OnSleep()

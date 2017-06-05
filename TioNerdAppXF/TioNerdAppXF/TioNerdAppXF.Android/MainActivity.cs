@@ -14,11 +14,10 @@ namespace TioNerdAppXF.Droid
 
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
-
             //Chamada para o SDK do Azure
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
+            global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new Application());
         }
     }

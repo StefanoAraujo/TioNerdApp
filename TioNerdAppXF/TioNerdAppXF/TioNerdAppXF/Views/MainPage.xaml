@@ -5,21 +5,14 @@
              x:Class="TioNerdAppXF.MainPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sair" Command="{Binding LogOutCommand}" Icon="ic_exit.png" />
+        <ToolbarItem Text="Info" Command="{Binding UserInfoCommand}" Priority="0" />
+        <ToolbarItem Text="Sair" Command="{Binding LogOutCommand}" Icon="ic_exit.png" />        
     </ContentPage.ToolbarItems>
 
-    <StackLayout HorizontalOptions="CenterAndExpand"
-                 VerticalOptions="FillAndExpand"
-                 BackgroundColor="#e0e0e0"
+    <StackLayout BackgroundColor="#e0e0e0"
                  Spacing="10"
                  >
-        <Image Source="ic_renew.png">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding GetFriendsCommand}"/>
-            </Image.GestureRecognizers>
-        </Image>
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
-        
         <ListView ItemsSource="{Binding FriendsCollection}"
                   HasUnevenRows="True"
                   SeparatorColor="Silver"
@@ -27,7 +20,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="20">
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Padding="10"
+                                     VerticalOptions="CenterAndExpand">
                             <Label Text="{Binding CompleteName}" Style="{StaticResource StyleName}" />
                             <Label Text="{Binding Age, StringFormat='{0} anos'}" Style="{StaticResource StyleAge}" />
                             <Label Text="{Binding FacebookPage}" Style="{StaticResource StyleUrl}" />
@@ -36,7 +31,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        <StackLayout HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand"
+                     Orientation="Horizontal">
+            <Button Command="{Binding GetFriendsCommand}" Image="ic_renew.png" />
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

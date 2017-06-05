@@ -14,16 +14,20 @@ namespace TioNerdAppXF.ViewModels
         private readonly AzureService _azureService;
         public string UserId { get; private set; }
         public string Token { get; private set; }
-        //public bool IsLogged { get; private set; }
 
         public ObservableCollection<Friend> FriendsCollection { get; set; }
 
         public Command GetFriendsCommand { get; }
         public Command LogOutCommand { get; }
 
+        public Command UserInfoCommand { get; }
+
         public MainViewModel()
         {
             _azureService = DependencyService.Get<AzureService>();
+
+            IsBusy = false;
+
             Title = "Lista de Amigos";
 
             UserId = Settings.UserId;
@@ -34,8 +38,19 @@ namespace TioNerdAppXF.ViewModels
 
             LogOutCommand = new Command(async () => await ExecuteLogOutCommandAsync(), () => !IsBusy);
 
+            UserInfoCommand = new Command(async () => await ExecuteUserInfoCommandAsync(), () => !IsBusy);
+
             // Para o comando executar, "jogamos" uma condição que, somente poderá ser executado se a prop IsBusy não for true
             GetFriendsCommand = new Command(async () => await ExecuteGetFriendsCommandAsync(), () => !IsBusy);
+        }
+
+        private async Task ExecuteUserInfoCommandAsync()
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new FacebookInfoPage());
         }
 
         async Task ExecuteGetFriendsCommandAsync()
@@ -48,6 +63,7 @@ namespace TioNerdAppXF.ViewModels
             try
             {
                 IsBusy = true;
+
                 var repositorio = new Repositorio();
                 var items = await repositorio.GetFriends();
                 FriendsCollection.Clear();
@@ -81,7 +97,8 @@ namespace TioNerdAppXF.ViewModels
             try
             {
                 await _azureService.LogoutAsync();
-                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                await Application.Current.MainPage.Navigation.PopAsync();
+                Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
             catch (Exception ex)
             {

@@ -4,15 +4,25 @@ using TioNerdAppXF.Authentication;
 using TioNerdAppXF.Helpers;
 using TioNerdAppXF.Services;
 using Xamarin.Forms;
+using TioNerdAppXF.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 [assembly: Dependency(typeof(AzureService))]
 namespace TioNerdAppXF.Services
 {
     public class AzureService
     {
+        List<AppServiceIdentity> identities = null;
+
         private static readonly string AppUrl = "http://tionerdmobile.azurewebsites.net";
 
         public MobileServiceClient Client { get; set; } = null;
+
+        public MobileServiceUser User { get; set; }
+
+        public FacebookProfile profile { get; set; }
 
         public void Initialize()
         {
@@ -33,9 +43,9 @@ namespace TioNerdAppXF.Services
             Initialize();
 
             var auth = DependencyService.Get<IAuthentication>();
-            var user = await auth.LoginAsync(Client, MobileServiceAuthenticationProvider.Facebook);
+            User = await auth.LoginAsync(Client, MobileServiceAuthenticationProvider.Facebook);
 
-            if (user == null)
+            if (User == null)
             {
                 Settings.AuthToken = string.Empty;
                 Settings.UserId = string.Empty;
@@ -50,8 +60,8 @@ namespace TioNerdAppXF.Services
             }
             else
             {
-                Settings.AuthToken = user.MobileServiceAuthenticationToken;
-                Settings.UserId = user.UserId;
+                Settings.AuthToken = User.MobileServiceAuthenticationToken;
+                Settings.UserId = User.UserId;
             }
 
             return true;
@@ -65,12 +75,34 @@ namespace TioNerdAppXF.Services
                 return;
 
             // Remove the token from the cache
-            Client.CurrentUser = new MobileServiceUser(string.Empty) {MobileServiceAuthenticationToken = string.Empty};
+            Client.CurrentUser = new MobileServiceUser(string.Empty) { MobileServiceAuthenticationToken = string.Empty };
             Settings.UserId = string.Empty;
             Settings.AuthToken = string.Empty;
 
             // Remove the token from the MobileServiceClient
             await Client.LogoutAsync();
+        }
+
+        public async Task<FacebookProfile> GetFacebookProfileAsync()
+        {            
+
+            identities = await Client.InvokeApiAsync<List<AppServiceIdentity>>("/.auth/me");
+            var completeName = identities[0].UserClaims.Find(c => c.Type.Equals("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")).Value;
+            var userToken = identities[0].AcessToken;
+
+            var requestUrl = $"https://graph.facebook.com/v2.9/me/?fields=id,name,picture.height(700)&access_token={userToken}";
+
+            var httpClient = new HttpClient();
+
+            var userJson = await httpClient.GetStringAsync(requestUrl);
+
+            var facebookProfile = JsonConvert.DeserializeObject<FacebookProfile>(userJson);
+
+            Settings.AuthToken = User.MobileServiceAuthenticationToken;
+            Settings.UserId = User.UserId;
+            Settings.Nome = completeName;
+
+            return facebookProfile;
         }
 
     }
