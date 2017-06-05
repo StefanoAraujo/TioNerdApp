@@ -8,7 +8,7 @@ Este App possui Social Login com o Facebook, utilizando como ferramenta o SDK do
 
 ## Facebook Login:
 #### Recuperando algumas informações (picture,gender) da Graph API via URL. OK
-- Obs.: Verificar algumas informações através do POSTMAN, para entender o JsonPropertyName da Model FacebookIdentity. 
+- Obs.: Verificar algumas informações através do POSTMAN, para entender o JsonPropertyName da Model AppServiceIdentity e FacebookProfile (que está na classe User). 
 - Link para conseguir realizar esta operação: https://adrianhall.github.io/develop-mobile-apps-with-csharp-and-azure/chapter2/authorization/
 
 ## Google Login:
