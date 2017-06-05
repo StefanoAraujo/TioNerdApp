@@ -5,4 +5,13 @@ Este App possui Social Login com o Facebook, utilizando como ferramenta o SDK do
 
 # //  TODO:
 #### Será adicionado mais tarde, no aplicativo, outras formas de login, como o Google.
-#### Também irei adicionar algumas features para resgatar o nome, sobrenome, email e foto de perfil do usuário em qualquer plataforma usada      		para entrar no aplicativo
+
+## Facebook Login:
+#### Recuperando algumas informações (picture,gender) da Graph API via URL. OK
+Obs.: Verificar algumas informações através do POSTMAN, para entender o JsonPropertyName da Model FacebookIdentity. 
+Link para conseguir realizar esta operação: https://adrianhall.github.io/develop-mobile-apps-with-csharp-and-azure/chapter2/authorization/
+
+## Google Login:
+#### Nothing yet!! :/
+
+# Hooly moly. Let's do this!! 
