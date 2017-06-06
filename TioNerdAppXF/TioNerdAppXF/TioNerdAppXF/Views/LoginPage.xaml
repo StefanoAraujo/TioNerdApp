@@ -9,7 +9,7 @@
                  VerticalOptions="CenterAndExpand">
         <StackLayout
             HorizontalOptions="CenterAndExpand"
-            VerticalOptions="Center">
+            VerticalOptions="Start">
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#000000" />
         </StackLayout>
         <Label Text="Entre no aplicativo com seu Facebook" Style="{StaticResource StyleDescription}" />

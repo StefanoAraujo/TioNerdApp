@@ -97,7 +97,7 @@ namespace TioNerdAppXF.Droid.Service
 
             if (!string.IsNullOrEmpty(message))
             {
-                CreateNotification("Nova Notificação", message);
+                CreateNotification("TioNerd App", message);
                 return;
             }
 
@@ -139,8 +139,8 @@ namespace TioNerdAppXF.Droid.Service
                     .SetSmallIcon(Resource.Drawable.icon)
                     .SetTicker(title)
                     .SetContentTitle(title)
-                    .SetContentText(desc)
-                    .SetSubText("Kappa")
+                    .SetContentText("Kappa")
+                    .SetSubText(desc)
 
                     //Set the notification sound
                     .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TioNerdAppXF.Helpers;
 using TioNerdAppXF.Services;
+using TioNerdAppXF.Views;
 using Xamarin.Forms;
 
 namespace TioNerdAppXF.ViewModels
@@ -28,7 +29,8 @@ namespace TioNerdAppXF.ViewModels
             if (IsBusy || !await LoginAsync())
                 return;
 
-            await PushAsync<MainViewModel>();
+            await Task.Delay(3000);
+            Xamarin.Forms.Application.Current.MainPage = new NavigationPage(new MainPage());
             IsBusy = false;
         }
 
