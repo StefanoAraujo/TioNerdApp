@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using Xamarin.Forms.Platform.Android;
 
 [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
 [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
@@ -98,7 +97,7 @@ namespace TioNerdAppXF.Droid.Service
 
             if (!string.IsNullOrEmpty(message))
             {
-                CreateNotification("Push", message);
+                CreateNotification("Nova Notificação", message);
                 return;
             }
 
@@ -141,6 +140,7 @@ namespace TioNerdAppXF.Droid.Service
                     .SetTicker(title)
                     .SetContentTitle(title)
                     .SetContentText(desc)
+                    .SetSubText("Kappa")
 
                     //Set the notification sound
                     .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))

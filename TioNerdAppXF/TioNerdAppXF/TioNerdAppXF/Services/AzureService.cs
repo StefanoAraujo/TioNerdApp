@@ -17,7 +17,7 @@ namespace TioNerdAppXF.Services
     {
         List<AppServiceIdentity> identities = null;
 
-        private static readonly string AppUrl = Constants.mobileServiceURL;
+        private static readonly string AppUrl = "http://tionerdmobile.azurewebsites.net";
 
         public MobileServiceClient Client { get; set; } = null;
 
