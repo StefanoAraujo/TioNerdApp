@@ -14,7 +14,7 @@ namespace TioNerdAppXF.Services
 
         public AzureEasyTableService()
         {
-            string myServiceURL = "http://tionerdapp.azurewebsites.net";
+            string myServiceURL = Helpers.Constants.mobileServiceURL;
             Client = new MobileServiceClient(myServiceURL);
             TmobileServiceTable = Client.GetTable<T>();
         }

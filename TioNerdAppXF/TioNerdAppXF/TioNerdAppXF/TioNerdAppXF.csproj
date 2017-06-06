@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authentication\IAuthentication.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Models\AppServiceIdentity.cs" />
     <Compile Include="Models\Friend.cs" />
